@@ -26,11 +26,10 @@ app.listen("3000", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-	res.render("templates/home");
+	res.render("home");
 });
 
-app.get("/newsite", async (req, res) => {
-	const site = new Site({ name: "Test", description: "test tourist site" });
-	await site.save();
-	res.send(site);
+app.get("/sites", async (req, res) => {
+	const sites = await Site.find({});
+	res.render("sites/index", { sites });
 });

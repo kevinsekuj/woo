@@ -20,7 +20,7 @@ const seed = async () => {
 	await Site.deleteMany({});
 	for (let i = 0; i < 10; i++) {
 		const init = new Site({
-			name: "Seeded tourist site",
+			name: `Seeded tourist site ${i}`,
 			price: 25,
 			description: "A tourist site",
 			location: "Worcester, MA",
