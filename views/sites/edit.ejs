@@ -9,7 +9,7 @@
 	<body>
 		<h1>Edit site submission</h1>
 
-		<form action="/sites" method="POST">
+		<form action="/sites/<%=site._id%>?_method=PUT" method="POST">
 			<div>
 				<label for="">Title</label>
 				<input
@@ -29,6 +29,11 @@
 				/>
 			</div>
 			<button>Update site</button>
+		</form>
+
+		<br />
+		<form action="/sites/<%=site._id%>?_method=DELETE" method="POST">
+			<button>Delete site</button>
 		</form>
 
 		<a href="/sites/<%=site._id%>">Return to site information</a>

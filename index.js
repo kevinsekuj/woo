@@ -59,3 +59,15 @@ app.get("/sites/:id", async (req, res) => {
 	const site = await Site.findById(id);
 	res.render("sites/site", { site });
 });
+
+app.put("/sites/:id", async (req, res) => {
+	const { id } = req.params;
+	const site = await Site.findByIdAndUpdate(id, { ...req.body.site });
+	res.redirect(`/sites/${id}`);
+});
+
+app.delete("/sites/:id", async (req, res) => {
+	const { id } = req.params;
+	await Site.findByIdAndDelete(id);
+	res.redirect("/sites/");
+});
