@@ -19,11 +19,14 @@ const seed = async () => {
 	// clear db and seed with starter entry, close connection on seed
 	await Site.deleteMany({});
 	for (let i = 0; i < 10; i++) {
+		const price = Math.floor(Math.random() * 30) + 5;
 		const init = new Site({
 			name: `Seeded tourist site ${i}`,
-			price: 25,
-			description: "A tourist site",
+			price: price,
+			description:
+				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
 			location: "Worcester, MA",
+			image: "https://source.unsplash.com/collection/3106804",
 		});
 		await init.save();
 	}
