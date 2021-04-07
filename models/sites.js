@@ -6,6 +6,7 @@ const touristSiteSchema = new Schema({
 	price: Number,
 	description: String,
 	location: String,
+	image: String,
 });
 
 module.exports = mongoose.model("Site", touristSiteSchema);
