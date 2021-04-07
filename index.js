@@ -1,9 +1,11 @@
 const express = require("express");
 const app = express();
-const path = require("path");
-const Site = require("./models/sites");
+const morgan = require("morgan");
 const mongoose = require("mongoose");
 const methodOverride = require("method-override");
+const path = require("path");
+const Site = require("./models/sites");
+const ejsMate = require("ejs-mate");
 
 mongoose.connect("mongodb://localhost/sites", {
 	useNewUrlParser: true,
@@ -19,11 +21,17 @@ mongoose.connection.once("open", () => {
 	console.log("db connected");
 });
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+app.use(
+	morgan(
+		":method | :url | status :status | :res[content-length] - | :response-time ms"
+	)
+);
 
 app.listen("3000", (req, res) => {
 	console.log("Listening on port 3000");
@@ -70,4 +78,8 @@ app.delete("/sites/:id", async (req, res) => {
 	const { id } = req.params;
 	await Site.findByIdAndDelete(id);
 	res.redirect("/sites/");
+});
+
+app.use((req, res) => {
+	res.status(404).send("Page not found.");
 });
