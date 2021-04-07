@@ -7,10 +7,13 @@
 		<title>Tourist sites</title>
 	</head>
 	<body>
+		<div>
+			<a href="/sites/add">Add a new site</a>
+		</div>
 		<h1>Sites</h1>
 		<ul>
 			<% for( let site of sites) { %>
-			<li><%=site.name%></li>
+			<li><a href="/sites/<%=site._id%>"> <%=site.name%> </a></li>
 			<% } %>
 		</ul>
 	</body>
