@@ -6,8 +6,9 @@ const methodOverride = require("method-override");
 const path = require("path");
 const Site = require("./models/sites");
 const ejsMate = require("ejs-mate");
-const catchAsync = require("./handlers/asyncError");
-const expressError = require("./handlers/error");
+const catchAsync = require("./utilities/asyncError");
+const expressError = require("./utilities/error");
+const validate = require("./utilities/validate");
 
 mongoose.connect("mongodb://localhost/sites", {
 	useNewUrlParser: true,
@@ -53,6 +54,7 @@ app.get(
 
 app.post(
 	"/sites",
+	validate,
 	catchAsync(async (req, res) => {
 		const newSite = new Site(req.body.site);
 		await newSite.save();
@@ -84,6 +86,7 @@ app.get(
 
 app.put(
 	"/sites/:id",
+	validate,
 	catchAsync(async (req, res) => {
 		const { id } = req.params;
 		await Site.findByIdAndUpdate(id, { ...req.body.site });
