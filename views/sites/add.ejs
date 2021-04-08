@@ -1,23 +1,75 @@
 <% layout('/partials/boilerplate') %>
 
-<form action="/sites" method="POST">
+<form action="/sites" method="POST" novalidate class="needs-validation">
 	<div>
-		<label for="">Title</label>
+		<label for="">Title:</label>
 		<input
+			class="form-control"
 			type="text"
 			name="site[name]"
 			id="site"
 			placeholder="Enter a name"
+			required
 		/>
+		<div class="valid-feedback">Perfect!</div>
+		<div class="invalid-feedback">Please enter a valid title.</div>
 	</div>
-	<div>
-		<label for="">Location</label>
+
+	<div class="mt-2">
+		<label for="">Location:</label>
 		<input
+			class="form-control"
 			type="text"
 			name="site[location]"
 			id="location"
 			placeholder="Enter a location"
+			required
 		/>
+		<div class="valid-feedback">Perfect!</div>
+		<div class="invalid-feedback">Please enter a valid site location.</div>
 	</div>
-	<button>Submit new site</button>
+
+	<div class="mt-2">
+		<label for="">Price:</label>
+		<input
+			class="form-control"
+			type="text"
+			name="site[price]"
+			id="price"
+			placeholder="Enter the site's cost"
+			required
+		/>
+		<div class="valid-feedback">Perfect!</div>
+		<div class="invalid-feedback">Please enter a valid price.</div>
+	</div>
+
+	<div class="mt-2">
+		<label for="">Description:</label>
+		<textarea
+			class="form-control rows=3"
+			type="text"
+			name="site[description]"
+			id="description"
+			placeholder="Enter a description about the site"
+			required
+		/></textarea>
+		<div class="valid-feedback">Perfect!</div>
+		<div class="invalid-feedback">
+			Please enter a description for the site.
+		</div>
+	</div>
+
+	<!-- <div class="mt-2">
+		<label for="">Upload new image</label>
+		<input
+			class="form-control"
+			type="file"
+			name="site[image]"
+			id="image"
+			required
+		/>
+		<div class="invalid-feedback">Please attach an image to upload.</div>
+	</div> -->
+	<br />
+	<button type="submit" class="btn btn-success">Submit a new site</button>
 </form>

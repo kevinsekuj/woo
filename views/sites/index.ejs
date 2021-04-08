@@ -1,13 +1,12 @@
 <% layout('/partials/boilerplate') %>
 
-<body>
-	<div>
-		<a href="/sites/add">Add a new site</a>
-	</div>
-	<h1>Sites</h1>
-	<ul>
-		<% for( let site of sites) { %>
-		<li><a href="/sites/<%=site._id%>"> <%=site.name%> </a></li>
-		<% } %>
-	</ul>
-</body>
+<h1>Sites</h1>
+<ul>
+	<% for( let site of sites) { %>
+	<li><a href="/sites/<%=site._id%>"> <%=site.name%> </a></li>
+	<% } %>
+</ul>
+
+<div>
+	<a href="/sites/add">Add a new site</a>
+</div>

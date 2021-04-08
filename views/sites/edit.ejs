@@ -1,26 +1,82 @@
 <% layout('/partials/boilerplate') %>
+
 <h1>Edit site submission</h1>
 
-<form action="/sites/<%=site._id%>?_method=PUT" method="POST">
+<form action="/sites/<%=site._id%>?_method=PUT" method="POST" novalidate class="needs-validation">
+	<div class="form-group">
+		<div>
+			<label for="">Site name:</label>
+			<input
+				class="form-control"
+				type="text"
+				name="site[name]"
+				id="site"
+				value="<%=site.name%>"
+				required
+			/>
+			<div class="valid-feedback">Perfect!</div>
+			<div class="invalid-feedback">Please enter a valid title.</div>
+		</div>
+
+		<div>
+			<label for="">Location:</label>
+			<input
+				class="form-control"
+				type="text"
+				name="site[location]"
+				id="location"
+				value="<%=site.location%>"
+				required
+			/>
+			<div class="valid-feedback">Perfect!</div>
+			<div class="invalid-feedback">Please enter a valid site location.</div>
+		</div>
+	
+		<div>
+			<label for="">Price:</label>
+			<input
+				class="form-control"
+				type="text"
+				name="site[price]"
+				id="price"
+				value="<%=site.price%>"
+				required
+			/>
+			<div class="valid-feedback">Perfect!</div>
+			<div class="invalid-feedback">Please enter a valid price.</div>
+		</div>
+
 	<div>
-		<label for="">Title</label>
-		<input type="text" name="site[name]" id="site" value="<%=site.name%>" />
-	</div>
-	<div>
-		<label for="">Location</label>
-		<input
+		<label for="">Description:</label>
+		<textarea
+			class="form-control rows=3"
 			type="text"
-			name="site[location]"
-			id="location"
-			value="<%=site.location%>"
-		/>
+			name="site[description]"
+			id="description"
+			required
+		/><%=site.description%></textarea>
+		<div class="valid-feedback">Perfect!</div>
+		<div class="invalid-feedback">Please enter a valid price.</div>
 	</div>
-	<button>Update site</button>
+
+		<div>
+			<label for="">Upload new image</label>
+			<input
+				class="form-control"
+				type="file"
+				name="site[image]"
+				id="image"
+				value="<%=site.image%>"
+				--
+			/>
+		</div>
+<br>
+		<button type="submit" class="btn btn-primary">Update</button>
+	</div>
 </form>
 
-<br />
 <form action="/sites/<%=site._id%>?_method=DELETE" method="POST">
-	<button>Delete site</button>
+	<button type="submit" class="btn btn-danger">Delete</button>
 </form>
 
 <a href="/sites/<%=site._id%>">Return to site information</a>
