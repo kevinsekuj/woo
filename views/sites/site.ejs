@@ -10,6 +10,32 @@
 	<img src="<%=site.image%> " alt="" />
 </p>
 
+<div>
+	<form action="/sites/<%=site._id%>/reviews" method="POST">
+		<div>
+			<label class="form-label" for="rating">
+				<input
+					class="form-range"
+					type="range"
+					min="1"
+					max="5"
+					name="review[rating"
+					id="rating"
+				/>
+			</label>
+		</div>
+		<label class="form-label" for="review"> Review </label>
+		<textarea
+			class="form-control"
+			name="review[body]"
+			id="review"
+			cols="5"
+			rows="3"
+		></textarea>
+		<button class="btn btn-success">Submit</button>
+	</form>
+</div>
+
 <footer>
 	<a href="/sites/">Return to all sites</a>
 	<a href="/sites/<%=site._id%>/edit">Edit this site</a>

@@ -9,6 +9,7 @@ const ejsMate = require("ejs-mate");
 const catchAsync = require("./utilities/asyncError");
 const expressError = require("./utilities/error");
 const validate = require("./utilities/validate");
+const Review = require("./models/review");
 
 mongoose.connect("mongodb://localhost/sites", {
 	useNewUrlParser: true,
@@ -80,6 +81,8 @@ app.get(
 	catchAsync(async (req, res) => {
 		const { id } = req.params;
 		const site = await Site.findById(id);
+
+		const review = new Review();
 		res.render("sites/site", { site });
 	})
 );
@@ -100,6 +103,21 @@ app.delete(
 		const { id } = req.params;
 		await Site.findByIdAndDelete(id);
 		res.redirect("/sites/");
+	})
+);
+
+app.post(
+	"/sites/:id/reviews",
+	catchAsync(async (req, res) => {
+		const { id } = req.params;
+		const site = await Site.findById(id);
+
+		const review = new Review(req.body.review);
+		site.reviews.push(review);
+
+		review.save();
+		site.save();
+		res.redirect(`/sites/${id}`);
 	})
 );
 
