@@ -18,14 +18,15 @@
 		class="needs-validation"
 	>
 		<div>
-			<label class="form-label" for="rating">
+			<label class="form-label">
 				<input
 					class="form-range"
 					type="range"
 					min="1"
 					max="5"
-					name="review[rating"
+					name="review[rating]"
 					id="rating"
+					required
 				/>
 			</label>
 		</div>
@@ -37,7 +38,7 @@
 				id="review"
 				cols="5"
 				rows="3"
-				required="true"
+				required
 			></textarea>
 			<div class="valid-feedback">Perfect!</div>
 			<div class="invalid-feedback">Please enter a review.</div>
