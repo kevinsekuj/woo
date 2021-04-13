@@ -1,14 +1,21 @@
 const express = require("express");
 const app = express();
+
 const morgan = require("morgan");
 const mongoose = require("mongoose");
+
 const methodOverride = require("method-override");
 const path = require("path");
+
 const Site = require("./models/sites");
 const ejsMate = require("ejs-mate");
+
 const catchAsync = require("./utilities/asyncError");
 const expressError = require("./utilities/error");
+
 const validate = require("./utilities/validate");
+const validateReview = require("./utilities/validateReview");
+
 const Review = require("./models/review");
 
 mongoose.connect("mongodb://localhost/sites", {
@@ -82,7 +89,6 @@ app.get(
 		const { id } = req.params;
 		const site = await Site.findById(id);
 
-		const review = new Review();
 		res.render("sites/site", { site });
 	})
 );
@@ -108,6 +114,7 @@ app.delete(
 
 app.post(
 	"/sites/:id/reviews",
+	validateReview,
 	catchAsync(async (req, res) => {
 		const { id } = req.params;
 		const site = await Site.findById(id);

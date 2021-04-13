@@ -11,7 +11,12 @@
 </p>
 
 <div>
-	<form action="/sites/<%=site._id%>/reviews" method="POST">
+	<form
+		action="/sites/<%=site._id%>/reviews"
+		method="POST"
+		novalidate
+		class="needs-validation"
+	>
 		<div>
 			<label class="form-label" for="rating">
 				<input
@@ -24,14 +29,20 @@
 				/>
 			</label>
 		</div>
-		<label class="form-label" for="review"> Review </label>
-		<textarea
-			class="form-control"
-			name="review[body]"
-			id="review"
-			cols="5"
-			rows="3"
-		></textarea>
+		<div>
+			<label class="form-label" for="review"> Review </label>
+			<textarea
+				class="form-control"
+				name="review[body]"
+				id="review"
+				cols="5"
+				rows="3"
+				required="true"
+			></textarea>
+			<div class="valid-feedback">Perfect!</div>
+			<div class="invalid-feedback">Please enter a review.</div>
+		</div>
+
 		<button class="btn btn-success">Submit</button>
 	</form>
 </div>
