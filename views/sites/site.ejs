@@ -48,6 +48,11 @@
 	</form>
 </div>
 
+<% for( let review of site.reviews) { %>
+<p>Rating: <%= review.rating %></p>
+<p>Review: <%= review.body%></p>
+<% } %>
+
 <footer>
 	<a href="/sites/">Return to all sites</a>
 	<a href="/sites/<%=site._id%>/edit">Edit this site</a>

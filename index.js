@@ -87,7 +87,7 @@ app.get(
 	"/sites/:id",
 	catchAsync(async (req, res) => {
 		const { id } = req.params;
-		const site = await Site.findById(id);
+		const site = await Site.findById(id).populate("reviews");
 
 		res.render("sites/site", { site });
 	})
