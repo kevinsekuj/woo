@@ -128,6 +128,16 @@ app.post(
 	})
 );
 
+app.delete("/sites/:id/reviews/:reviewid", async (req, res) => {
+	const { id, reviewid } = req.params;
+
+	// pull operator to pull reviews array element with matching id
+	await Site.findByIdAndUpdate(id, { $pull: { reviews: reviewid } });
+	await Review.findByIdAndDelete(reviewid);
+
+	res.redirect(`/sites/${id}`);
+});
+
 app.all("*", (req, res, next) => {
 	next(new expressError("Page not found.", 404));
 });
