@@ -23,12 +23,14 @@ mongoose.connection.once("open", () => {
 	console.log("db connected");
 });
 
-// initialize templating engine, middleware
+// initialize templating engine, middleware, static files
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
+
+app.use(express.static(path.join((__dirname, "public"))));
 
 // shorthand for express routing
 app.use("/sites", sites);
