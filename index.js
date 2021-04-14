@@ -1,10 +1,13 @@
 const express = require("express");
 const app = express();
+const session = require("express-session");
+const flash = require("connect-flash");
 
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
 const sites = require("./routes/route");
+
 const methodOverride = require("method-override");
 const reviews = require("./routes/reviewRoutes");
 const expressError = require("./utilities/error");
@@ -31,6 +34,29 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 app.use(express.static(path.join((__dirname, "public"))));
+
+// configure express session
+const sessionCfg = {
+	secret: "aaa",
+	resave: false,
+	saveUninitialized: true,
+	cookie: {
+		expires: Date.now() + 604800000,
+		maxAge: 604800000, // expire in 1wk
+		httpOnly: true, // protect against XSS
+	},
+};
+// init flash middleware to store/display session msgs, and session
+app.use(session(sessionCfg));
+app.use(flash());
+
+// middleware to access flash messages in ejs templates
+
+app.use((req, res, next) => {
+	res.locals.success = req.flash("success");
+	res.locals.error = req.flash("error");
+	next();
+});
 
 // shorthand for express routing
 app.use("/sites", sites);

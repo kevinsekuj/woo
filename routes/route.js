@@ -24,6 +24,7 @@ router.post(
 	catchAsync(async (req, res) => {
 		const newSite = new Site(req.body.site);
 		await newSite.save();
+		req.flash("success", "Success! Site created");
 		res.redirect(`/sites/${newSite._id}`);
 	})
 );
@@ -53,6 +54,7 @@ router.put(
 	catchAsync(async (req, res) => {
 		const { id } = req.params;
 		await Site.findByIdAndUpdate(id, { ...req.body.site });
+		req.flash("success", "Successfully updated tourist site!");
 		res.redirect(`/sites/${id}`);
 	})
 );
@@ -62,6 +64,7 @@ router.delete(
 	catchAsync(async (req, res) => {
 		const { id } = req.params;
 		await Site.findByIdAndDelete(id);
+		req.flash("success", "Successfully deleted tourist site!");
 		res.redirect("/sites/");
 	})
 );

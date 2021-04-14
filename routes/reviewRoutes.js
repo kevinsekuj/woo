@@ -19,6 +19,8 @@ router.post(
 
 		review.save();
 		site.save();
+
+		req.flash("success", "Successfully added review.");
 		res.redirect(`/sites/${id}`);
 	})
 );
