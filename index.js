@@ -12,6 +12,11 @@ const methodOverride = require("method-override");
 const reviews = require("./routes/reviewRoutes");
 const expressError = require("./utilities/error");
 
+const passport = require("passport");
+const LocalStrategy = require("passport-local");
+const User = require("./models/user");
+const users = require("./routes/auth");
+
 mongoose.connect("mongodb://localhost/sites", {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
@@ -26,41 +31,56 @@ mongoose.connection.once("open", () => {
 	console.log("db connected");
 });
 
-// initialize templating engine, middleware, static files
+// init ejs for dynamic templating
 app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
-app.set("views", path.join(__dirname, "views"));
+
+// parse incoming requests with urlencoded payloads
 app.use(express.urlencoded({ extended: true }));
+
+// method override middleware for put/delete requests
 app.use(methodOverride("_method"));
 
+// init passport middleware for user auth and session
+app.use(
+	session({
+		secret: "aaa", // todo actual secret .env(?)
+		resave: false,
+		saveUninitialized: true,
+		cookie: {
+			expires: Date.now() + 604800000,
+			maxAge: 604800000, // expire in 1wk
+			httpOnly: true, // protect against XSS
+		},
+	})
+);
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+// serialize users into session
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+// serve views folder and static files
+app.set("views", path.join(__dirname, "views"));
 app.use(express.static(path.join((__dirname, "public"))));
 
-// configure express session
-const sessionCfg = {
-	secret: "aaa",
-	resave: false,
-	saveUninitialized: true,
-	cookie: {
-		expires: Date.now() + 604800000,
-		maxAge: 604800000, // expire in 1wk
-		httpOnly: true, // protect against XSS
-	},
-};
 // init flash middleware to store/display session msgs, and session
-app.use(session(sessionCfg));
 app.use(flash());
 
-// middleware to access flash messages in ejs templates
-
+// middleware to access (global) locals in templates
 app.use((req, res, next) => {
+	res.locals.currentUser = req.user;
 	res.locals.success = req.flash("success");
 	res.locals.error = req.flash("error");
 	next();
 });
 
-// shorthand for express routing
+// shorthand for express router
 app.use("/sites", sites);
 app.use("/sites/:id/reviews", reviews);
+app.use("/", users);
 
 // routes
 app.listen("3000", (req, res) => {
