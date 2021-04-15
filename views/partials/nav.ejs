@@ -29,6 +29,18 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/sites/add">Add a new site</a>
                 </li>
+                <% if(!currentUser)  { %> 
+                <li class="nav-item">
+                    <a class="nav-link" href="/sites/add">Login</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/sites/add">Register</a>
+                </li>
+                <% } else {%> 
+                <li class="nav-item">
+                    <a class="nav-link" href="/sites/add">Logout</a>
+                </li>
+                <% } %> 
                 </li>
             </ul>
         </div>
