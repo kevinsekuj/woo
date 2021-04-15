@@ -42,8 +42,13 @@ router.post(
 		failureRedirect: true,
 	}),
 	(req, res) => {
+		// keep track of user redirect path if exists and delete
+		// once cast to a var
+		const redirectUrl = req.session.returnTo || "/sites";
+		delete req.session.returnTo;
+
 		req.flash("success", "Welcome back!");
-		res.redirect("/sites");
+		res.redirect(redirectUrl);
 	}
 );
 
