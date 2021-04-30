@@ -6,10 +6,10 @@ const flash = require("connect-flash");
 const path = require("path");
 const ejsMate = require("ejs-mate");
 const mongoose = require("mongoose");
-const sites = require("./routes/route");
+const sites = require("./routes/sites");
 
 const methodOverride = require("method-override");
-const reviews = require("./routes/reviewRoutes");
+const reviews = require("./routes/reviews");
 const expressError = require("./utilities/error");
 
 const passport = require("passport");
@@ -44,7 +44,7 @@ app.use(methodOverride("_method"));
 // init passport middleware for user auth and session
 app.use(
 	session({
-		secret: "aaa", // todo actual secret .env(?)
+		secret: "aaa", // todo actual secret
 		resave: false,
 		saveUninitialized: true,
 		cookie: {

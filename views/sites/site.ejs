@@ -1,6 +1,7 @@
 <% layout('/partials/boilerplate') %>
 
 <h1>Site name: <%=site.name%></h1>
+<h2>Submitted by <%= site.author.username %></h2>
 <h2>Location: <%= site.location %></h2>
 <h2>Price: $<%= site.price %></h2>
 
@@ -30,6 +31,7 @@
 				/>
 			</label>
 		</div>
+		<% if(currentUser) {%>
 		<div>
 			<label class="form-label" for="review"> Review </label>
 			<textarea
@@ -45,23 +47,28 @@
 		</div>
 
 		<button class="btn btn-success">Submit</button>
+		<% } %>
 	</form>
 </div>
 
 <% for( let review of site.reviews) { %>
 <p>Rating: <%= review.rating %></p>
+<p>by: <%= review.author.username %></p>
 <p>Review: <%= review.body%></p>
 
 <form
 	action="/sites/<%=site._id%>/reviews/<%=review._id%>?_method=DELETE"
 	method="post"
 >
+	<% if(currentUser && review.author.equals(currentUser)) { %>
 	<button class="btn btn-danger">Delete</button>
+	<% } %>
 </form>
-
-<% } %>
+<%}%>
 
 <footer>
 	<a href="/sites/">Return to all sites</a>
+	<% if(currentUser && site.author.equals(currentUser)) { %>
 	<a href="/sites/<%=site._id%>/edit">Edit this site</a>
+	<%}%>
 </footer>
