@@ -21,6 +21,8 @@ const seed = async () => {
 	for (let i = 0; i < 10; i++) {
 		const price = Math.floor(Math.random() * 30) + 5;
 		const init = new Site({
+			// must be assigned to a valid user objectid else won't render
+			author: "6088cba027756cd75e6a6f86",
 			name: `Seeded tourist site ${i}`,
 			price: price,
 			description:
