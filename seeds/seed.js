@@ -23,12 +23,17 @@ const seed = async () => {
 		const init = new Site({
 			// must be assigned to a valid user objectid else won't render
 			author: "6088cba027756cd75e6a6f86",
-			name: `Seeded tourist site ${i}`,
+			name: `Seeded tourist site ${i + 1}`,
 			price: price,
 			description:
 				"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. ",
 			location: "Worcester, MA",
-			image: "https://source.unsplash.com/collection/3106804",
+			images: [
+				{
+					url: "https://source.unsplash.com/collection/3106804",
+					filename: "placeholder",
+				},
+			],
 		});
 		await init.save();
 	}
