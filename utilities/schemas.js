@@ -6,8 +6,9 @@ const siteSchema = Joi.object({
 		price: Joi.number().required().min(0),
 		description: Joi.string().required(),
 		location: Joi.string().required(),
-		image: Joi.string(),
+		// image: Joi.string(),
 	}).required(),
+	deleteImages: Joi.array(), // array containing checked img filepaths
 });
 
 module.exports = siteSchema;
