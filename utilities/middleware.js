@@ -52,7 +52,6 @@ module.exports.validateReview = (req, res, next) => {
 module.exports.authorize = async (req, res, next) => {
 	const { id } = req.params;
 	const site = await Site.findById(id);
-	console.log(site);
 
 	if (!site.author.equals(req.user._id)) {
 		req.flash("error", "You don't have permission to view this page.");
