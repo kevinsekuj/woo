@@ -7,8 +7,12 @@
 
 <p>Description: <%= site.description%></p>
 <br />
+<!-- todo : carousel imgs -->
 <p>
-	<img src="<%=site.image%> " alt="" />
+	<% for(let image of site.images) { %>
+	<img src="<%=image.url%> " alt="" />
+
+	<% } %>
 </p>
 
 <div>

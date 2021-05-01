@@ -2,7 +2,7 @@
 
 <h1>Edit site submission</h1>
 
-<form action="/sites/<%=site._id%>?_method=PUT" method="POST" novalidate class="needs-validation">
+<form action="/sites/<%=site._id%>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
 	<div class="form-group">
 		<div>
 			<label for="">Site name:</label>
@@ -59,17 +59,23 @@
 		<div class="invalid-feedback">Please enter a valid price.</div>
 	</div>
 
-		<div>
-			<label for="">Upload new image</label>
-			<input
-				class="form-control"
-				type="file"
-				name="site[image]"
-				id="image"
-				value="<%=site.image%>"
-				--
-			/>
+	<div>
+		<label for="">Upload new image</label>
+		<div class="mt-2">
+			<input type="file" name="image" id="image" multiple="true">
+			
 		</div>
+	</div>
+	<div>
+		<% site.images.forEach(function(img, i) { %>
+		 <img src="<%=img.url%>" class="img-thumbnail">
+		<div class="form-check-inline">
+			<input type="checkbox" name="deleteImages[]" value="<%=img.filename%>" id="image<%=i%>">
+			<label for="image<%=i%>">Select for deletion</label>
+		</div>
+
+		<% }) %>
+	</div>
 <br>
 		<button type="submit" class="btn btn-primary">Update</button>
 	</div>
