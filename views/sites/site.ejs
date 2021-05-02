@@ -55,6 +55,8 @@
 	</form>
 </div>
 
+<div id="map"></div>
+
 <% for( let review of site.reviews) { %>
 <p>Rating: <%= review.rating %></p>
 <p>by: <%= review.author.username %></p>
@@ -70,9 +72,14 @@
 </form>
 <%}%>
 
-<footer>
+<div>
 	<a href="/sites/">Return to all sites</a>
 	<% if(currentUser && site.author.equals(currentUser)) { %>
 	<a href="/sites/<%=site._id%>/edit">Edit this site</a>
 	<%}%>
-</footer>
+</div>
+
+<div
+	class="coord"
+	id="<%=site.coords[0].latitude%>,<%=site.coords[0].longitude%> "
+></div>
