@@ -32,7 +32,7 @@ mongoose.connection.on(
 	console.error.bind(console, "Connection error:")
 );
 mongoose.connection.once("open", () => {
-	console.log("db connected");
+	console.log("MongoDB connected");
 });
 
 // init ejs for dynamic templating
@@ -48,7 +48,7 @@ app.use(methodOverride("_method"));
 // init passport middleware for user auth and session
 app.use(
 	session({
-		secret: "aaa", // todo actual secret
+		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
 		cookie: {
@@ -91,7 +91,7 @@ app.listen("3000", (req, res) => {
 	console.log("Listening on port 3000");
 });
 
-app.get("/home", (req, res) => {
+app.get("/", (req, res) => {
 	res.render("home");
 });
 

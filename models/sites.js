@@ -6,6 +6,12 @@ const touristSiteSchema = new Schema({
 	name: String,
 	price: Number,
 	description: String,
+	coords: [
+		{
+			latitude: String,
+			longitude: String,
+		},
+	],
 	location: String,
 	images: [
 		{
