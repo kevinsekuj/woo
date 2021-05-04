@@ -14,7 +14,7 @@ module.exports.createReview = async (req, res) => {
 	review.save();
 	site.save();
 
-	req.flash("success", "Successfully added review.");
+	req.flash("success", "Successfully added review!");
 	res.redirect(`/sites/${id}`);
 };
 

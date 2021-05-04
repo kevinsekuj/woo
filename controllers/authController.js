@@ -18,7 +18,7 @@ module.exports.register = async (req, res, next) => {
 			res.redirect("/sites");
 		});
 	} catch (e) {
-		// display err and redirect
+		// flash err and redirect
 		req.flash("error", e.message);
 		res.redirect("/register");
 	}
