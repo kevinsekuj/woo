@@ -1,27 +1,278 @@
-@import "bulma/css/bulma.css";
-
-.alert {
-	width: 100%;
-}
-
-/* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-#map {
-	height: 50%;
-	width: 50%;
-}
-
 body {
-	min-height: 100vh;
-	display: flex;
-	flex-direction: column;
+	font-family: "ＭＳ ゴシック", "Noto Sans JP", "ヒラギノ角ゴ ProN",
+		"Hiragino Kaku Gothic ProN", "游ゴシック", "游ゴシック体", YuGothic,
+		"Yu Gothic", "メイリオ", Meiryo, HiraKakuProN-W3, "TakaoExゴシック",
+		TakaoExGothic, "MotoyaLCedar", "Droid Sans Japanese", sans-serif;
+	background-color: #f5f5f5;
 }
-footer {
-	margin-top: auto;
+
+/* overwiting bulma btn styles*/
+button {
+	font-family: "ＭＳ ゴシック", "Noto Sans JP", "ヒラギノ角ゴ ProN",
+		"Hiragino Kaku Gothic ProN", "游ゴシック", "游ゴシック体", YuGothic,
+		"Yu Gothic", "メイリオ", Meiryo, HiraKakuProN-W3, "TakaoExゴシック",
+		TakaoExGothic, "MotoyaLCedar", "Droid Sans Japanese", sans-serif;
+}
+
+#flashsuccess {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#flashsuccess p {
+	margin-right: 10px;
+}
+
+#flashsuccess {
+	animation: fadeOut ease 6s;
+}
+
+#flasherror {
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#flasherror p {
+	margin-right: 10px;
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+		display: none;
+	}
 }
 
 .navbar {
-	margin: 0.5% 20% 0 20%;
-	font-size: 1.25em;
+	font-family: "Noto Sans JP", Times, sans-serif;
+	font-size: 1.1em;
 	font-weight: 500;
+	letter-spacing: 2px;
+}
+
+.navbar-start {
+	letter-spacing: 1px;
+}
+
+main {
+	font-family: "Source Sans Pro", sans-serif;
+	display: flex;
+	min-height: 75vh;
+}
+
+footer {
+	letter-spacing: 2px;
+	font-weight: 100;
+}
+
+#alertbox {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	margin: auto;
+	align-self: center;
+	min-width: 25%;
+	min-height: 200px;
+}
+
+#alertheader {
+	text-align: center;
+}
+
+#registerBox {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	margin: auto;
+	width: 25%;
+}
+
+#registerBox > h3 {
+	text-align: center;
+	letter-spacing: 2.5px;
+}
+
+#createBox {
+	margin: 10% auto;
+	width: 74.5%;
+}
+
+.lower-wrapper {
+	display: flex;
+	justify-content: space-between;
+}
+
+#button-container {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	margin-top: 35px;
+}
+
+.main-wrapper {
+	margin: 3% 0;
+	display: flex;
+	justify-content: space-evenly;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.card p:nth-child(1) {
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.card:nth-child(n + 4) {
+	margin-top: 30px;
+}
+.card > .card-header {
+	background-color: #f5f5f5;
+	color: rgba(0, 0, 0, 0.7);
+	font-size: 1.75em;
+	min-width: 550px;
+}
+
+#locationtitle {
+	text-align: center;
+	letter-spacing: 2px;
+}
+
+#locationinfo > h5 {
+	text-align: center;
+}
+
+#locationinfo > p {
+	text-align: left;
+}
+
+.swiper-container {
+	width: 525px;
+	height: 625px;
+}
+
+#site-image {
+	background-size: contain;
+	background-repeat: no-repeat;
+}
+
+.coord {
+	display: none;
+}
+
+.site-container {
+	width: 100%;
+	margin: 15px 0 0 0;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+}
+
+.sitewrapper {
+	margin: 0 150px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#site-card {
+	max-width: 650px;
+}
+
+#map-review-container {
+	display: flex;
+	flex-direction: column;
+}
+
+#map-container {
+	max-height: 600px;
+}
+
+#map {
+	height: 450px;
+	width: 800px;
+}
+
+#location-header {
+	text-align: center;
+}
+
+#review-container {
+	margin: 30px auto;
+}
+
+#review-box {
+	height: 250px;
+}
+
+#review > div {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+#all-reviews {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	padding: 10px 5px;
+}
+
+#all-reviews > h2 {
+	text-align: center;
+	letter-spacing: 3px;
+	min-width: 1000px;
+}
+
+#user-review {
+	padding: 10px;
+	margin: 10px;
+	border-style: none;
+}
+
+#user-review:nth-of-type(2n) {
+	background-color: rgb(226, 226, 226);
+	border-radius: 10px;
+}
+
+#edit-header {
+	position: absolute;
+	text-align: center;
+	top: 8%;
+	left: 2%;
+	width: 3%;
+	padding: 5px 6px;
+	letter-spacing: 1px;
+}
+
+#edit-header a {
+	text-decoration: none;
+}
+
+#editbox {
+	margin: 5% auto;
+	width: 74.5%;
+}
+
+.updateimages {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-evenly;
+}
+
+#updateimage {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-evenly;
+	margin: 20px;
+	padding: 20px;
+}
+
+#deletepage {
+	margin-right: 100px;
 }
