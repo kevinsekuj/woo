@@ -1,2 +1,2 @@
 *.ejs linguist-detectable=true
-public/stylesheets/stars.css export-ignore
+public/stylesheets/stars.css linguist-generated=true
