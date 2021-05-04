@@ -1,0 +1,19 @@
+<!-- render success flash message exists -->
+<% if (success && success.length) {%>
+<article class="message is-success mt-6" id="flashsuccess">
+	<div class="message-header">
+		<p><%=success %></p>
+		<button class="delete" aria-label="delete"></button>
+	</div>
+</article>
+<%}%>
+
+<script>
+	document.querySelector(".delete").addEventListener("click", function () {
+		document.getElementById("flashsuccess").style.display = "none";
+	});
+
+	setTimeout(() => {
+		document.getElementById("flashsuccess").style.display = "none";
+	}, 6002);
+</script>

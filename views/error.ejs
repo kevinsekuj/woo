@@ -1,8 +1,11 @@
 <% layout('/partials/boilerplate') %>
 
-<div class="alert alert-warning" role="alert">
-	<h4 class="alert-heading"><%= err.status%></h4>
-	<p></p>
-	<hr />
-	<p class="mb-0">Status: <%=err.message %></p>
+<div class="box" id="alertbox">
+	<div class="notification is-warning" id="alertheader">
+		<h3 class="title is-3"><%= err.status%></h4>
+	  </div>
+	  <div>
+		<h4 class="subtitle is-4"><strong>Status</strong>: <%=err.message %></h2>
+	</div>
 </div>
+

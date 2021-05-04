@@ -1,88 +1,158 @@
 <% layout('/partials/boilerplate') %>
 
-<h1>Edit site submission</h1>
+<div class="container">
+	<div class="form-container">
+		<form
+			action="/sites/<%=site._id%>?_method=PUT"
+			method="POST"
+			enctype="multipart/form-data"
+		>
+			<div class="box" id="editbox">
+				<div class="columns">
+					<div class="field mr-4 ml-5">
+						<label class="label">Title</label>
+						<div class="control has-icons-left">
+							<input
+								class="input is-dark"
+								type="text"
+								name="site[name]"
+								id="site"
+								value="<%=site.name%>"
+								required
+							/>
+							<span class="icon is-small is-left">
+								<i class="fas fa-sign"></i>
+							</span>
+						</div>
+					</div>
 
-<form action="/sites/<%=site._id%>?_method=PUT" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-	<div class="form-group">
-		<div>
-			<label for="">Site name:</label>
-			<input
-				class="form-control"
-				type="text"
-				name="site[name]"
-				id="site"
-				value="<%=site.name%>"
-				required
-			/>
-			<div class="valid-feedback">Perfect!</div>
-			<div class="invalid-feedback">Please enter a valid title.</div>
-		</div>
+					<div class="field mr-4">
+						<label class="label">Address</label>
+						<div class="control has-icons-left">
+							<input
+								class="input is-dark"
+								type="text"
+								name="site[location]"
+								id="location"
+								value="<%=site.location%>"
+								required
+							/>
+							<span class="icon is-small is-left">
+								<i class="fas fa-globe"></i>
+							</span>
+						</div>
+					</div>
 
-		<div>
-			<label for="">Location:</label>
-			<input
-				class="form-control"
-				type="text"
-				name="site[location]"
-				id="location"
-				value="<%=site.location%>"
-				required
-			/>
-			<div class="valid-feedback">Perfect!</div>
-			<div class="invalid-feedback">Please enter a valid site location.</div>
-		</div>
-	
-		<div>
-			<label for="">Price:</label>
-			<input
-				class="form-control"
-				type="text"
-				name="site[price]"
-				id="price"
-				value="<%=site.price%>"
-				required
-			/>
-			<div class="valid-feedback">Perfect!</div>
-			<div class="invalid-feedback">Please enter a valid price.</div>
-		</div>
+					<div class="field">
+						<label class="label">Price</label>
+						<div class="control has-icons-left">
+							<input
+								class="input is-dark"
+								type="text"
+								name="site[price]"
+								id="price"
+								value="<%=site.price%>"
+								required
+							/>
+							<span class="icon is-small is-left">
+								<i class="fas fa-dollar-sign"></i>
+							</span>
+						</div>
+					</div>
+				</div>
 
-	<div>
-		<label for="">Description:</label>
-		<textarea
-			class="form-control rows=3"
-			type="text"
-			name="site[description]"
-			id="description"
-			required
-		/><%=site.description%></textarea>
-		<div class="valid-feedback">Perfect!</div>
-		<div class="invalid-feedback">Please enter a valid price.</div>
+				<div>
+					<div class="field">
+						<label class="label">Description</label>
+						<div class="control">
+							<textarea
+								class="textarea is-dark"
+								type="text"
+								name="site[description]"
+								id="description"
+								required
+							>
+<%=site.description%></textarea
+							>
+						</div>
+					</div>
+
+					<div class="lower-wrapper">
+						<div class="file is-boxed">
+							<label class="file-label">
+								<input
+									class="file-input"
+									type="file"
+									name="image"
+									id="fileinput"
+									multiple="true"
+								/>
+								<span class="file-cta">
+									<span class="file-icon">
+										<i class="fas fa-upload"></i>
+									</span>
+									<span class="file-label">
+										Upload new images
+									</span>
+								</span>
+							</label>
+						</div>
+
+						<div>
+							<div class="field" id="button-container">
+								<form
+									action="/sites/<%=site._id%>?_method=DELETE"
+									method="POST"
+								>
+									<button
+										type="submit"
+										class="button is-danger is-outlined"
+										id="deletepage"
+									>
+										Delete this page
+									</button>
+								</form>
+
+								<div class="control">
+									<button class="button is-primary">
+										Update
+									</button>
+								</div>
+
+								<div class="control ml-3">
+									<button
+										form="cancel"
+										class="button is-outlined"
+									>
+										Cancel
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div>
+				<div class="updateimages">
+					<% site.images.forEach(function(img, i) { %>
+					<div class="container">
+						<figure class="image is-128x128" id="updateimage">
+							<img src="<%=img.url%>" class="img-thumbnail" />
+						</figure>
+						<label class="checkbox">
+							<input
+								type="checkbox"
+								name="deleteImages[]"
+								value="<%=img.filename%>"
+								id="image<%=i%>"
+							/>
+							<label for="image<%=i%>">Select for deletion</label>
+						</label>
+					</div>
+					<% }) %>
+				</div>
+			</div>
+		</form>
+		<div class="section"></div>
 	</div>
-
-	<div>
-		<label for="">Upload new image</label>
-		<div class="mt-2">
-			<input type="file" name="image" id="image" multiple="true">
-			
-		</div>
-	</div>
-	<div>
-		<% site.images.forEach(function(img, i) { %>
-		 <img src="<%=img.url%>" class="img-thumbnail">
-		<div class="form-check-inline">
-			<input type="checkbox" name="deleteImages[]" value="<%=img.filename%>" id="image<%=i%>">
-			<label for="image<%=i%>">Select for deletion</label>
-		</div>
-
-		<% }) %>
-	</div>
-<br>
-		<button type="submit" class="btn btn-primary">Update</button>
-	</div>
-</form>
-
-<form action="/sites/<%=site._id%>?_method=DELETE" method="POST">
-	<button type="submit" class="btn btn-danger">Delete</button>
-</form>
-
-<a href="/sites/<%=site._id%>">Return to site information</a>
+</div>

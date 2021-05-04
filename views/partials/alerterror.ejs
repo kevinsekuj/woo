@@ -1,0 +1,15 @@
+<!-- render err flash message exists -->
+<% if (error && error.length) {%>
+<article class="message is-warning mt-6" id="flasherror">
+	<div class="message-header">
+		<p><%= error %></p>
+		<button class="delete" aria-label="delete"></button>
+	</div>
+</article>
+<%}%>
+
+<script>
+	document.querySelector(".delete").addEventListener("click", function () {
+		document.getElementById("flasherror").style.display = "none";
+	});
+</script>

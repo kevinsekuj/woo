@@ -1,81 +1,122 @@
 <% layout('/partials/boilerplate') %>
 
-<form action="/sites" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-	<div>
-		<label for="">Title:</label>
-		<input
-			class="form-control"
-			type="text"
-			name="site[name]"
-			id="site"
-			placeholder="Enter a name"
-			required
-		/>
-		<div class="valid-feedback">Perfect!</div>
-		<div class="invalid-feedback">Please enter a valid title.</div>
-	</div>
+<div class="container">
+	<div class="form-container">
+		<form action="/sites" method="POST" enctype="multipart/form-data">
+			<div class="box" id="createBox">
+				<div class="columns">
+					<div class="field mr-4 ml-5">
+						<label class="label">Title</label>
+						<div class="control has-icons-left">
+							<input
+								class="input is-dark"
+								type="text"
+								name="site[name]"
+								id="site"
+								placeholder="Enter the location's name"
+								required
+							/>
+							<span class="icon is-small is-left">
+								<i class="fas fa-sign"></i>
+							</span>
+						</div>
+					</div>
 
-	<div class="mt-2">
-		<label for="">Location:</label>
-		<input
-			class="form-control"
-			type="text"
-			name="site[location]"
-			id="location"
-			placeholder="Enter a location"
-			required
-			value=""
-		/>
-		<div class="valid-feedback">Perfect!</div>
-		<div class="invalid-feedback">Please enter a valid site location.</div>
-	</div>
+					<div class="field mr-4">
+						<label class="label">Address</label>
+						<div class="control has-icons-left">
+							<input
+								class="input is-dark"
+								type="text"
+								name="site[location]"
+								id="location"
+								placeholder="Enter the address of this location"
+								required
+								value=""
+							/>
+							<span class="icon is-small is-left">
+								<i class="fas fa-globe"></i>
+							</span>
+						</div>
+					</div>
 
-	<div class="mt-2">
-		<label for="">Price:</label>
-		<input
-			class="form-control"
-			type="text"
-			name="site[price]"
-			id="price"
-			placeholder="Enter the site's cost"
-			required
-		/>
-		<div class="valid-feedback">Perfect!</div>
-		<div class="invalid-feedback">Please enter a valid price.</div>
-	</div>
+					<div class="field">
+						<label class="label">Price</label>
+						<div class="control has-icons-left">
+							<input
+								class="input is-dark"
+								type="number"
+								name="site[price]"
+								id="price"
+								placeholder="Enter this location's price in USD"
+								required
+							/>
+							<span class="icon is-small is-left">
+								<i class="fas fa-dollar-sign"></i>
+							</span>
+						</div>
+					</div>
+				</div>
 
-	<div class="mt-2">
-		<label for="">Description:</label>
-		<textarea
-			class="form-control rows=3"
-			type="text"
-			name="site[description]"
-			id="description"
-			placeholder="Enter a description about the site"
-			required
-		/></textarea>
-		<div class="valid-feedback">Perfect!</div>
-		<div class="invalid-feedback">
-			Please enter a description for the site.
-		</div>
-	</div>
+				<div>
+					<div class="field">
+						<label class="label">Description</label>
+						<div class="control">
+							<textarea
+								class="textarea"
+								type="text"
+								name="site[description]"
+								id="description"
+								placeholder="Enter a concise description about this location. Be sure to include any personal experiences!"
+								required
+							></textarea>
+						</div>
+					</div>
 
-	<div class="mt-2">
-		<input type="file" name="image" id="" multiple="true">
-		
-	</div>
+					<div class="lower-wrapper">
+						<div class="file is-boxed">
+							<label class="file-label">
+								<input
+									class="file-input"
+									type="file"
+									name="image"
+									id="fileinput"
+									multiple="true"
+								/>
+								<span class="file-cta">
+									<span class="file-icon">
+										<i class="fas fa-upload"></i>
+									</span>
+									<span class="file-label">
+										Upload images
+									</span>
+								</span>
+							</label>
+						</div>
 
-	<!-- <div class="mt-2">
-		<label for="">Upload new image</label>
-		<input
-			class="form-control"
-			type="file"
-			name="site[image]"
-			id="image"
-			required
-		/>
-		<div class="invalid-feedback">Please attach an image to upload.</div>
-	</div> -->
-	<br />
-	<button type="submit" id="submit-button" class="btn btn-success">Submit a new site</button>
-</form>
+						<div>
+							<div class="field" id="button-container">
+								<div class="control">
+									<button class="button is-dark">
+										Submit this location
+									</button>
+								</div>
+
+								<div class="control ml-3">
+									<button
+										form="cancel"
+										class="button is-outlined"
+									>
+										Cancel
+									</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</form>
+
+		<form id="cancel" action="/sites" method="GET"></form>
+	</div>
+</div>

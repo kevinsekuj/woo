@@ -1,85 +1,142 @@
 <% layout('/partials/boilerplate') %>
 
-<h1>Site name: <%=site.name%></h1>
-<h2>Submitted by <%= site.author.username %></h2>
-<h2>Location: <%= site.location %></h2>
-<h2>Price: $<%= site.price %></h2>
 
-<p>Description: <%= site.description%></p>
-<br />
-<!-- todo : carousel imgs -->
-<p>
-	<% for(let image of site.images) { %>
-	<img src="<%=image.url%> " alt="" />
+<div class="site-container">
 
-	<% } %>
-</p>
-
-<div>
-	<form
-		action="/sites/<%=site._id%>/reviews"
-		method="POST"
-		novalidate
-		class="needs-validation"
-	>
-		<div>
-			<label class="form-label">
-				<input
-					class="form-range"
-					type="range"
-					min="1"
-					max="5"
-					name="review[rating]"
-					id="rating"
-					required
-				/>
-			</label>
-		</div>
-		<% if(currentUser) {%>
-		<div>
-			<label class="form-label" for="review"> Review </label>
-			<textarea
-				class="form-control"
-				name="review[body]"
-				id="review"
-				cols="5"
-				rows="3"
-				required
-			></textarea>
-			<div class="valid-feedback">Perfect!</div>
-			<div class="invalid-feedback">Please enter a review.</div>
-		</div>
-
-		<button class="btn btn-success">Submit</button>
-		<% } %>
-	</form>
-</div>
-
-<div id="map"></div>
-
-<% for( let review of site.reviews) { %>
-<p>Rating: <%= review.rating %></p>
-<p>by: <%= review.author.username %></p>
-<p>Review: <%= review.body%></p>
-
-<form
-	action="/sites/<%=site._id%>/reviews/<%=review._id%>?_method=DELETE"
-	method="post"
->
-	<% if(currentUser && review.author.equals(currentUser)) { %>
-	<button class="btn btn-danger">Delete</button>
-	<% } %>
-</form>
-<%}%>
-
-<div>
-	<a href="/sites/">Return to all sites</a>
 	<% if(currentUser && site.author.equals(currentUser)) { %>
-	<a href="/sites/<%=site._id%>/edit">Edit this site</a>
+		<div class="notification is-info is-inverted" id="edit-header">
+			<a href="/sites/<%=site._id%>/edit">edit</a>
+			</div>
+		<%}%>
+
+			<div class="sitewrapper">
+				<div class="box" id="site-card">
+					<h2 class="title" id="locationtitle"><%=site.name%></h2>
+					<div class="swiper-container">
+						<div class="swiper-wrapper">
+							<% const resize = str => { %>
+							<%	return str.slice(0, 50) + "c_fill,h_700,w_600" + str.slice(61); %> 
+							<% } %>
+							<% for(let image of site.images) { %>
+								<% let img = resize(image.url) %>
+								<div class="swiper-slide" id="site-image" style="background-image:url(<%=img%>); " alt="" /></div>
+								<% } %>
+						</div>
+						<%if (site.images.length > 1) {%> 
+						<div class="swiper-pagination"></div>
+						<div class="swiper-button-prev"></div>
+						<div class="swiper-button-next"></div>
+						<% } %> 
+					</div>
+					<div class="container" id="locationinfo">
+						<h5 class="title is-5">Submitted by <%=site.author.username%></h4>
+							<p><%= site.description%></p>
+					</div>
+				</div>
+
+				<div class="contaner" id="map-review-container">
+						<div class="box" id="map-container">
+							<div id="map"></div>
+							<div class="container ml-2 mt-3">
+								<div class="content" id="location-header" ><h3 class="title is-3 "><%= site.location %> </h3>
+									<p class="subtitle is-3 mt-1">Entry fee: $<%= site.price %> </p>
+									</div>
+							</div>
+						</div>
+
+						<div class="box" id="review">
+							<div>
+								<h5 class="title is-5">Leave a review!</h3>
+								<div>
+									<form
+										action="/sites/<%=site._id%>/reviews"
+										method="POST"
+									>
+									<fieldset class="starability-checkmark">
+										<input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="1" checked
+											aria-label="No rating." />
+										<input type="radio" id="first-rate1" name="review[rating]" value="1" />
+										<label for="first-rate1" title="Terrible">1 star</label>
+										<input type="radio" id="first-rate2" name="review[rating]" value="2" />
+										<label for="first-rate2" title="Not good">2 stars</label>
+										<input type="radio" id="first-rate3" name="review[rating]" value="3" />
+										<label for="first-rate3" title="Average">3 stars</label>
+										<input type="radio" id="first-rate4" name="review[rating]" value="4" />
+										<label for="first-rate4" title="Very good">4 stars</label>
+										<input type="radio" id="first-rate5" name="review[rating]" value="5" />
+										<label for="first-rate5" title="Amazing">5 stars</label>
+									</fieldset>
+								</div>
+							</div>
+								<% if(currentUser) {%>
+								<div>
+									<label class="form-label" for="review"> </label>
+									<textarea
+										class="textarea is-dark"
+										name="review[body]"
+										id="review"
+										cols="4"
+										rows="2"
+										placeholder="Enter a concise review about this location. Be sure to include any personal experiences!"
+										required
+									></textarea>
+								</div>
+				
+								<button class="button is-dark mt-2">Submit</button>
+								<% } %>
+							</form>
+						</div>
+					</div>
+
+			</div>
+
+	<% if(site.reviews.length > 0) { %>
+	<div class="container" id="review-container">
+
+		<div class="box" id="all-reviews">
+			<h2 class="title is-2">User Reviews</h3>
+		<% for( let review of site.reviews) { %>
+			<article class="media" id="user-review">
+				<figure class="media-left">
+				  <p class="image is-64x64">
+					<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/User-avatar.svg/2048px-User-avatar.svg.png">
+				  </p>
+				</figure>
+				<div class="media-content">
+				  <div class="content">
+					<p>
+
+					  <strong class="mr-2"><%=review.author.username%></strong> <small><%=review.author.email%></small> 
+					  <small class="starability-result ml-5" data-rating="<%=review.rating%>"></small>
+					  <br>
+					  <div class="content"> <%=review.body%></div>
+					</p>
+				  </div>
+				</div>
+				<form
+				action="/sites/<%=site._id%>/reviews/<%=review._id%>?_method=DELETE"
+				method="post"
+			>
+				<% if(currentUser && review.author.equals(currentUser)) { %>
+					<button class="button is-small is-danger is-outlined">
+						<span>Delete</span>
+						<span class="icon is-small">
+						  <i class="fas fa-times"></i>
+						</span>
+					  </button>
+				<% } %>
+			</form>
+			  </article>
+		<%}%>
+		</div>
+
+	</div>
 	<%}%>
+
 </div>
+
 
 <div
-	class="coord"
-	id="<%=site.coords[0].latitude%>,<%=site.coords[0].longitude%> "
+class="coord"
+id="<%=site.coords[0].latitude%>,<%=site.coords[0].longitude%>"
 ></div>
