@@ -100,9 +100,8 @@ app.use("/sites", sites);
 app.use("/sites/:id/reviews", reviews);
 app.use("/", users);
 
-// routes
-const port = process.env.PORT || 3000;
-app.listen(port || 3000, (req, res) => {
+//routes
+app.listen(process.env.PORT, (req, res) => {
 	console.log(`Listening on port ${port}`);
 });
 
