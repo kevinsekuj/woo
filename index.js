@@ -102,7 +102,7 @@ app.use("/", users);
 
 //routes
 app.listen(process.env.PORT, (req, res) => {
-	console.log(`Listening on port ${port}`);
+	console.log(`Listening on port ${process.env.PORT}`);
 });
 
 app.get("/", (req, res) => {
