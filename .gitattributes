@@ -1,2 +1,2 @@
-*.ejs linguist-detectable=true
+*.ejs linguist-detectable=false
 public/stylesheets/stars.css linguist-generated=true
