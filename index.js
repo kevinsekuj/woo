@@ -63,7 +63,7 @@ app.use(
 	session({
 		store: new MongoStore({
 			url: process.env.DB_URL,
-			touchAfter = 24 * 60 * 60,
+			touchAfter: 24 * 60 * 60,
 		}),
 		secret: process.env.SESSION_SECRET,
 		resave: false,
