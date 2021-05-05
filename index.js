@@ -48,11 +48,11 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // Mongo with session store
-// const store = new MongoStore({
-// 	url: process.env.DB_URL,
-// 	secret: process.env.SESSION_SECRET,
-// 	touchAfter: 24 * 60 * 60,
-// });
+const store = new MongoStore({
+	url: process.env.DB_URL,
+	secret: process.env.SESSION_SECRET,
+	touchAfter: 24 * 60 * 60,
+});
 
 store.on("error", function (e) {
 	console.log(e);
@@ -61,10 +61,8 @@ store.on("error", function (e) {
 // init passport middleware for user auth and session
 app.use(
 	session({
-		store: new MongoStore({
-			url: process.env.DB_URL,
-			touchAfter: 24 * 60 * 60,
-		}),
+		store,
+		name: "session",
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
