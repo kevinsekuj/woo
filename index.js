@@ -20,13 +20,16 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const users = require("./routes/auth");
-const MongoStore = require("connect-mongodb-session")(session);
+const MongoDBStore = require("connect-mongo")(session);
 // mongodb:localhost/sites
 
-mongoose.connect(process.env.DB_URL, {
+const dbUrl = process.env.DB_URL;
+
+mongoose.connect(dbUrl, {
 	useNewUrlParser: true,
-	useUnifiedTopology: true,
 	useCreateIndex: true,
+	useUnifiedTopology: true,
+	useFindAndModify: true,
 });
 
 mongoose.connection.on(
@@ -48,8 +51,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(methodOverride("_method"));
 
 // Mongo with session store
-const store = new MongoStore({
-	url: process.env.DB_URL,
+const store = new MongoDBStore({
+	url: dbUrl,
 	secret: process.env.SESSION_SECRET,
 	touchAfter: 24 * 60 * 60,
 });
