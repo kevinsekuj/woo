@@ -20,8 +20,10 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const users = require("./routes/auth");
+const MongoStore = require("connect-mongodb-session")(session);
+// mongodb:localhost/sites
 
-mongoose.connect("mongodb://localhost/sites", {
+mongoose.connect(process.env.DB_URL, {
 	useNewUrlParser: true,
 	useUnifiedTopology: true,
 	useCreateIndex: true,
@@ -45,9 +47,21 @@ app.use(express.urlencoded({ extended: true }));
 // method override middleware for put/delete requests
 app.use(methodOverride("_method"));
 
+// Mongo with session store
+const store = new MongoStore({
+	url: process.env.DB_URL,
+	secret: process.env.SESSION_SECRET,
+	touchAfter: 24 * 60 * 60,
+});
+
+store.on("error", function (e) {
+	console.log(e);
+});
+
 // init passport middleware for user auth and session
 app.use(
 	session({
+		store,
 		secret: process.env.SESSION_SECRET,
 		resave: false,
 		saveUninitialized: true,
@@ -92,7 +106,7 @@ app.listen("3000", (req, res) => {
 });
 
 app.get("/", (req, res) => {
-	res.render("home");
+	res.redirect("sites");
 });
 
 app.all("*", (req, res, next) => {
