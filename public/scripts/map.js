@@ -3,7 +3,7 @@
 function initMap(latitude, longitude) {
 	const worcester = { lat: 42.269, lng: -71.802 };
 	const map = new google.maps.Map(document.getElementById("map"), {
-		zoom: 12,
+		zoom: 13,
 		center: worcester,
 	});
 	// this sucks but couldn't get ejs to pass vars to scripts
