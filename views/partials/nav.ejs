@@ -1,4 +1,4 @@
-<nav class="navbar is-dark" role="navigation" aria-label="main navigation">
+<nav class="navbar is-light" role="navigation" aria-label="main navigation">
 	<div class="navbar-brand">
 		<a
 			role="button"
@@ -44,12 +44,16 @@
 			<div class="navbar-item">
 				<div class="buttons">
 					<% if(!currentUser) { %>
-					<a class="button is-white" href="/register">
-						<strong>Sign up</strong>
+					<a class="button is-dark is-outlined" href="/register">
+						<strong>Sign up </strong>
 					</a>
-					<a class="button is-white" href="/login"> Sign in </a>
+					<a class="button is-dark is-outlined" href="/login">
+						<strong>Sign in </strong>
+					</a>
 					<% } else {%>
-					<a class="button is-white" href="/logout">Sign out</a>
+					<a class="button is-dark is-outlined" href="/logout"
+						>Sign out</a
+					>
 					<%}%>
 				</div>
 			</div>
