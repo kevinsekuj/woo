@@ -10,7 +10,7 @@ A full stack web application serving as a message board for tourist sites and lo
 
 ## Demo
 
-![Demo](/img/reduced.gif)
+![Demo](/img/resize.gif)
 
 ## Features
 
