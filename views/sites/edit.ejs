@@ -134,23 +134,6 @@
 				</div>
 			</div>
 			<div>
-				<div class="updateimages">
-					<% site.images.forEach(function(img, i) { %>
-					<div class="container">
-						<figure class="image is-128x128" id="updateimage">
-							<img src="<%=img.url%>" class="img-thumbnail" />
-						</figure>
-						<label class="checkbox">
-							<input
-								type="checkbox"
-								name="deleteImages[]"
-								value="<%=img.filename%>"
-								id="image<%=i%>"
-							/>
-							<label for="image<%=i%>">Select for deletion</label>
-						</label>
-					</div>
-					<% }) %>
 				</div>
 			</div>
 		</form>
