@@ -12,21 +12,23 @@
 			<div class="sitewrapper">
 				<div class="box" id="site-card">
 					<h2 class="title" id="locationtitle"><%=site.name%></h2>
-					<div class="swiper-container">
-						<div class="swiper-wrapper">
-							<% const resize = str => { %>
-							<%	return str.slice(0, 50) + "c_fill,h_700,w_600" + str.slice(61); %> 
-							<% } %>
-							<% for(let image of site.images) { %>
-								<% let img = resize(image.url) %>
-								<div class="swiper-slide" id="site-image" style="background-image:url(<%=img%>); " alt="" /></div>
+					<div class="swiper">
+						<div class="swiper-container">
+							<div class="swiper-wrapper">
+								<% const resize = str => { %>
+								<%	return str.slice(0, 50) + "c_fill,h_700,w_600" + str.slice(61); %> 
 								<% } %>
+								<% for(let image of site.images) { %>
+									<% let img = resize(image.url) %>
+									<div class="swiper-slide" id="site-image" style="background-image:url(<%=img%>); " alt="" /></div>
+									<% } %>
+							</div>
+							<%if (site.images.length > 1) {%> 
+							<div class="swiper-pagination"></div>
+							<div class="swiper-button-prev"></div>
+							<div class="swiper-button-next"></div>
+							<% } %> 
 						</div>
-						<%if (site.images.length > 1) {%> 
-						<div class="swiper-pagination"></div>
-						<div class="swiper-button-prev"></div>
-						<div class="swiper-button-next"></div>
-						<% } %> 
 					</div>
 					<div class="container" id="locationinfo">
 						<h5 class="title is-5">Submitted by <%=site.author.username%></h4>
