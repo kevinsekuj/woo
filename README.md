@@ -1,6 +1,6 @@
-<!-- # woo -->
+# ILoveWorcester
 
-[woosta.org](http://woosta.org) 
+<!-- [woosta.org](http://woosta.org)  -->
 
 A Node.js-based web application serving as a message board for tourist sites and locations in Worcester, MA. Users may submit posts with images and reviews, leave reviews and ratings, and view the locations in real-time via Google Maps API integration.
 
