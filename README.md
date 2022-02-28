@@ -17,7 +17,6 @@ A Node.js-based web application serving as a message board for tourist sites and
 - Full read, create, update, and delete functionality for posts, and creation/deletion for reviews
 - Multi-image upload and Maps API integration on each created post, including star reviews 
 - Authentication with Passport.js, client and server side error handling using Express middleware and Joi
-- Templates rendered from the server-side with embedded JavaScript templating
 
 ## Technologies
 
